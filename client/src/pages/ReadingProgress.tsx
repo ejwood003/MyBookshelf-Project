@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Book, GoalProgress } from '../api/types'
+import { BackToShelf } from '../components/BackToShelf'
 import { BookCover } from '../components/BookCover'
 import { describeDuration, formatDay, pluralize, stars } from '../lib/format'
+import { statusDotClass } from '../lib/status'
 import { useBookshelf } from '../state/useBookshelf'
 import './ReadingProgress.css'
 
@@ -33,10 +35,11 @@ export function ReadingProgress() {
 
   return (
     <main className="page reading">
-      <header className="reading__header">
-        <p className="hero__eyebrow">In progress</p>
-        <h1>What you're reading</h1>
-        <p className="hero__lede">
+      <header className="page-intro">
+        <BackToShelf />
+        <p className="page-intro__eyebrow">In progress</p>
+        <h1 className="page-intro__title">What you're reading</h1>
+        <p className="page-intro__lede">
           {reading.length > 0
             ? `${pluralize(reading.length, 'book')} open, ${pluralize(
                 reading.reduce((total, book) => total + book.pagesRemaining, 0),
@@ -72,7 +75,10 @@ export function ReadingProgress() {
       {finished.length > 0 && (
         <section className="reading__finished">
           <div className="section-heading">
-            <h2>Recently finished</h2>
+            <h2>
+              <span className={statusDotClass('Finished')} aria-hidden="true" />
+              Recently finished
+            </h2>
             <span className="count">{pluralize(finished.length, 'book')}</span>
           </div>
           <p className="section-caption">Proof that the shelf moves.</p>
@@ -136,7 +142,10 @@ function CurrentBookCard({ book }: { book: Book }) {
           <p className="current__author">{book.author}</p>
           <div className="current__meta">
             <span className="pill pill--genre">{book.genre}</span>
-            <span className="pill pill--accent">Currently reading</span>
+            <span className="pill pill--accent">
+              <span className={statusDotClass('CurrentlyReading')} aria-hidden="true" />
+              Currently reading
+            </span>
             {book.dateStarted && <span className="pill">Started {formatDay(book.dateStarted)}</span>}
           </div>
           <p className="current__remaining">

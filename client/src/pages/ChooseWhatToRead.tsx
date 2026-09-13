@@ -2,8 +2,10 @@ import { useCallback, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { api, ApiError } from '../api/client'
 import type { PickerMood, Recommendation, RecommendationSet } from '../api/types'
+import { BackToShelf } from '../components/BackToShelf'
 import { BookCover } from '../components/BookCover'
 import { pluralize } from '../lib/format'
+import { statusDotClass } from '../lib/status'
 import { useBookshelf } from '../state/useBookshelf'
 import './ChooseWhatToRead.css'
 
@@ -62,10 +64,11 @@ export function ChooseWhatToRead() {
 
   return (
     <main className="page choose">
-      <header className="choose__header">
-        <p className="hero__eyebrow">Your next book</p>
-        <h1>What should I read next?</h1>
-        <p className="hero__lede">
+      <header className="page-intro">
+        <BackToShelf />
+        <p className="page-intro__eyebrow">Your next book</p>
+        <h1 className="page-intro__title">What should I read next?</h1>
+        <p className="page-intro__lede">
           Three books from your own shelf, each with the reason it's worth starting today.
           Pick one, or put it back and see three more.
         </p>
@@ -99,7 +102,17 @@ export function ChooseWhatToRead() {
         </div>
       ) : (
         <>
-          {picks && <p className="choose__prompt">{picks.prompt}</p>}
+          {picks && (
+            /* One label for the whole set, rather than the same badge repeated on
+               all three cards: these books all come off the Want to Read shelf. */
+            <div className="choose__prompt-row">
+              <p className="choose__prompt">{picks.prompt}</p>
+              <span className="pill">
+                <span className={statusDotClass('WantToRead')} aria-hidden="true" />
+                From your Want to Read shelf
+              </span>
+            </div>
+          )}
 
           <div className={`choose__picks ${loading ? 'choose__picks--loading' : ''}`}>
             {picks?.picks.map((pick) => (

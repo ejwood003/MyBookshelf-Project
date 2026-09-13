@@ -1,74 +1,85 @@
-/* ---------------------------------------------------------------- hero */
+/* ---------------------------------------------------------------- primary action */
 
-.hero {
-  max-width: 44rem;
-  padding-block: 1.5rem 3rem;
-}
-
-.hero__eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  margin-top: 0.6rem;
-  text-wrap: balance;
-}
-
-.hero__lede {
-  margin-top: 1rem;
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  max-width: 38rem;
-}
-
-.hero__actions {
+.landing-action {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 1.25rem;
   margin-top: 1.75rem;
 }
 
-.hero__stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2.25rem;
-  margin: 2.5rem 0 0;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
+.landing-action__aside {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 1px;
 }
 
-.hero__stat dt {
+.landing-action__aside:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- collection stats */
+
+/* Four related numbers inside one border: a single region that answers
+   "what do I have?" rather than four separate facts competing for attention. */
+.collection-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 2.5rem 0 0;
+  padding: 0;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  background: var(--panel-bg);
+  overflow: hidden;
+}
+
+.collection-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.1rem 1.35rem;
+  border-left: 1px solid var(--line);
+}
+
+.collection-stat:first-child {
+  border-left: 0;
+}
+
+.collection-stat dt {
   font-size: 0.8125rem;
   color: var(--ink-faint);
   order: 2;
 }
 
-.hero__stat dd {
+.collection-stat dd {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.625rem;
   font-weight: 600;
   line-height: 1;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 
-.hero__stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
 /* ---------------------------------------------------------------- shelves */
 
+/* Each shelf is a bounded region, so a heading, its caption and its books read as
+   one unit and the three shelves stay clearly separate from one another. */
 .shelf {
-  margin-top: 3.25rem;
+  margin-top: 3rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
+}
+
+/* Shelves sit closer to each other than to the summary above them, so the three
+   of them read as one group rather than three separate sections. */
+.shelf + .shelf {
+  margin-top: 1.5rem;
 }
 
 .shelf__books {
@@ -136,6 +147,7 @@
     0 18px 28px -12px rgb(40 25 12 / 0.55);
 }
 
+/* Badges carry the status colour of the shelf they sit on. */
 .shelf__badge {
   position: absolute;
   top: -0.5rem;
@@ -147,12 +159,12 @@
   box-shadow: var(--shadow-sm);
   font-size: 0.6875rem;
   font-weight: 600;
-  color: var(--ink-soft);
+  color: var(--status-reading);
   font-variant-numeric: tabular-nums;
 }
 
 .shelf__badge--rating {
-  color: var(--gold);
+  color: var(--status-finished);
 }
 
 .shelf__empty {
@@ -165,7 +177,27 @@
   font-size: 0.9375rem;
 }
 
+@media (max-width: 700px) {
+  .collection-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* On two columns the left-hand cell of each row starts a new row, so it
+     loses the divider and the second row gains one above it. */
+  .collection-stat:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .collection-stat:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+}
+
 @media (max-width: 560px) {
+  .shelf {
+    padding: 1.25rem 1rem 1rem;
+  }
+
   .shelf__books {
     --slot-width: 6.5rem;
     --cover-height: 8.4rem;

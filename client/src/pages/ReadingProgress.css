@@ -1,13 +1,3 @@
-.reading__header {
-  max-width: 42rem;
-  padding-block: 1.5rem 0;
-}
-
-.reading__header h1 {
-  font-size: clamp(2rem, 5vw, 2.875rem);
-  margin-top: 0.6rem;
-}
-
 .reading__layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 18rem;
@@ -113,7 +103,7 @@
 .progress-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%);
+  background: var(--status-reading);
   transition: width 200ms ease;
 }
 
@@ -257,8 +247,9 @@
   stroke: var(--surface-sunk);
 }
 
+/* The ring counts finished books, so it carries the finished colour. */
 .goal__ring-fill {
-  stroke: var(--olive);
+  stroke: var(--status-finished);
   transition: stroke-dashoffset 400ms ease;
 }
 
@@ -319,8 +310,15 @@
 
 /* ---------------------------------------------------------------- finished */
 
+/* Bounded the same way as a shelf on My Books, so a finished book feels like it
+   moved into the same kind of container it came from. */
 .reading__finished {
-  margin-top: 3.5rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
 }
 
 .finished-list {

@@ -1,14 +1,11 @@
 import { NavLink } from 'react-router-dom'
 import './AppHeader.css'
 
-/**
- * The nav doubles as the story of the app: what do I have, what should I read,
- * what am I reading. The questions are the labels a reader actually has in mind.
- */
+/** In the order a reader moves through them: what they have, what to read, what they're reading. */
 const NAV_ITEMS = [
-  { to: '/', label: 'My Books', question: 'What do I have?' },
-  { to: '/choose', label: 'Choose What to Read', question: 'What should I read?' },
-  { to: '/reading', label: 'Reading Progress', question: "What am I reading?" },
+  { to: '/', label: 'My Books' },
+  { to: '/choose', label: 'Choose What to Read' },
+  { to: '/reading', label: 'Reading Progress' },
 ]
 
 export function AppHeader() {
@@ -32,8 +29,7 @@ export function AppHeader() {
                 `app-header__link ${isActive ? 'app-header__link--active' : ''}`
               }
             >
-              <span className="app-header__link-label">{item.label}</span>
-              <span className="app-header__link-question">{item.question}</span>
+              {item.label}
             </NavLink>
           ))}
         </nav>

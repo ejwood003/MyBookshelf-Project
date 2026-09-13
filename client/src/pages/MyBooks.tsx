@@ -4,6 +4,7 @@ import type { Book, Shelf } from '../api/types'
 import { BookCover } from '../components/BookCover'
 import { BookDetailDialog } from '../components/BookDetailDialog'
 import { pluralize } from '../lib/format'
+import { statusDotClass } from '../lib/status'
 import { useBookshelf } from '../state/useBookshelf'
 import './MyBooks.css'
 
@@ -30,36 +31,38 @@ export function MyBooks() {
     )
   }
 
-  const { readerName, summary, goal, shelves } = overview
+  const { summary, goal, shelves } = overview
 
   return (
     <main className="page">
-      <section className="hero">
-        <p className="hero__eyebrow">Your collection</p>
-        <h1>Everything on your shelf, {readerName}.</h1>
-        <p className="hero__lede">
-          {pluralize(summary.totalBooks, 'book')} in one place, sorted by where each one stands.
-          When the waiting shelf feels like too much, let it narrow the choice down to three.
+      <section className="page-intro page-intro--landing">
+        <p className="page-intro__eyebrow">Your collection</p>
+        <h1 className="page-intro__title">Everything on your shelf, in one place.</h1>
+        <p className="page-intro__lede">
+          {pluralize(summary.totalBooks, 'book')}, grouped by where each one stands — so you always
+          know what you own, what's waiting, and what to pick up next.
         </p>
-
-        <div className="hero__actions">
-          <Link to="/choose" className="btn btn--primary btn--large">
-            Choose My Next Book
-          </Link>
-          {summary.currentlyReading > 0 && (
-            <Link to="/reading" className="btn btn--secondary btn--large">
-              Pick up where I left off
-            </Link>
-          )}
-        </div>
-
-        <dl className="hero__stats">
-          <Stat value={summary.totalBooks} label="books owned" />
-          <Stat value={summary.currentlyReading} label="open right now" />
-          <Stat value={summary.wantToRead} label="waiting their turn" />
-          <Stat value={goal.booksFinished} label={`finished in ${goal.year}`} />
-        </dl>
       </section>
+
+      {/* The one thing this screen is for. Nothing else on the page is styled to
+          pull against it; the way back to a book in progress is a quiet aside. */}
+      <div className="landing-action">
+        <Link to="/choose" className="btn btn--primary btn--xl">
+          Choose My Next Book
+        </Link>
+        {summary.currentlyReading > 0 && (
+          <Link to="/reading" className="landing-action__aside">
+            or pick up where you left off
+          </Link>
+        )}
+      </div>
+
+      <dl className="collection-stats">
+        <Stat value={summary.totalBooks} label="books owned" />
+        <Stat value={summary.currentlyReading} label="open right now" />
+        <Stat value={summary.wantToRead} label="waiting their turn" />
+        <Stat value={goal.booksFinished} label={`finished in ${goal.year}`} />
+      </dl>
 
       {shelves.map((shelf) => (
         <ShelfSection key={shelf.status} shelf={shelf} onSelect={setSelected} />
@@ -72,7 +75,7 @@ export function MyBooks() {
 
 function Stat({ value, label }: { value: number; label: string }) {
   return (
-    <div className="hero__stat">
+    <div className="collection-stat">
       <dt>{label}</dt>
       <dd>{value}</dd>
     </div>
@@ -83,7 +86,10 @@ function ShelfSection({ shelf, onSelect }: { shelf: Shelf; onSelect: (book: Book
   return (
     <section className="shelf">
       <div className="section-heading">
-        <h2>{shelf.label}</h2>
+        <h2>
+          <span className={statusDotClass(shelf.status)} aria-hidden="true" />
+          {shelf.label}
+        </h2>
         <span className="count">{pluralize(shelf.books.length, 'book')}</span>
       </div>
       <p className="section-caption">{shelf.caption}</p>

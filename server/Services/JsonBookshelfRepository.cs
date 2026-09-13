@@ -23,10 +23,21 @@ public class JsonBookshelfRepository : IBookshelfRepository
     private readonly object _gate = new();
     private Bookshelf _bookshelf;
 
-    public JsonBookshelfRepository(IWebHostEnvironment environment, ILogger<JsonBookshelfRepository> logger)
+    public JsonBookshelfRepository(
+        IWebHostEnvironment environment,
+        IConfiguration configuration,
+        ILogger<JsonBookshelfRepository> logger)
     {
         _logger = logger;
-        var dataDirectory = Path.Combine(environment.ContentRootPath, "App_Data");
+
+        // Hosts that deploy the app as a read-only package (Azure App Service among
+        // them) cannot be written to, so the data location has to be settable rather
+        // than assumed to sit beside the binaries.
+        var configured = configuration["Bookshelf:DataDirectory"];
+        var dataDirectory = string.IsNullOrWhiteSpace(configured)
+            ? Path.Combine(environment.ContentRootPath, "App_Data")
+            : configured;
+
         Directory.CreateDirectory(dataDirectory);
         _filePath = Path.Combine(dataDirectory, "bookshelf.json");
         _bookshelf = Load();

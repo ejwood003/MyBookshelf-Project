@@ -4,6 +4,32 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ClientDirectory>$(MSBuildProjectDirectory)/../client</ClientDirectory>
   </PropertyGroup>
+
+  <!-- App_Data holds whatever the local run happened to save. The Web SDK treats loose
+       .json as content, which would ship one developer's reading progress as the
+       deployed starting state. -->
+  <ItemGroup>
+    <Content Remove="App_Data/**" />
+    <None Remove="App_Data/**" />
+  </ItemGroup>
+
+  <!-- The React bundle is not in source control, so a publish that only compiled C#
+       would deploy a shell with nothing to load. Build the client as part of publish
+       and add the output explicitly: wwwroot/app/.vite/manifest.json sits in a dotted
+       folder, which the default content globs skip. -->
+  <Target Name="PublishClient" AfterTargets="ComputeFilesToPublish">
+    <Exec Command="npm ci" WorkingDirectory="$(ClientDirectory)" />
+    <Exec Command="npm run build" WorkingDirectory="$(ClientDirectory)" />
+
+    <ItemGroup>
+      <ClientAssets Include="$(MSBuildProjectDirectory)/wwwroot/app/**" />
+      <ResolvedFileToPublish Include="@(ClientAssets)" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>wwwroot/app/%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
 
 </Project>

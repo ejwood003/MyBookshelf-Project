@@ -1,0 +1,391 @@
+.reading__header {
+  max-width: 42rem;
+  padding-block: 1.5rem 0;
+}
+
+.reading__header h1 {
+  font-size: clamp(2rem, 5vw, 2.875rem);
+  margin-top: 0.6rem;
+}
+
+.reading__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18rem;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 2.5rem;
+}
+
+.reading__current {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.reading__empty {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.reading__empty h2 {
+  font-size: 1.375rem;
+}
+
+.reading__empty p {
+  margin: 0.6rem auto 1.5rem;
+  max-width: 26rem;
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------- current book */
+
+.current {
+  padding: 1.75rem;
+}
+
+.current__top {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.current__info {
+  min-width: 0;
+}
+
+.current__info h2 {
+  font-size: 1.5rem;
+  text-wrap: balance;
+}
+
+.current__author {
+  margin-top: 0.3rem;
+  color: var(--ink-soft);
+}
+
+.current__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.current__remaining {
+  margin-top: 0.9rem;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  color: var(--ink-soft);
+}
+
+.current__progress {
+  margin-top: 1.5rem;
+}
+
+.current__progress-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.current__percent {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.current__pages {
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--surface-sunk);
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgb(60 40 20 / 0.12);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%);
+  transition: width 200ms ease;
+}
+
+/* Styled by hand so the slider reads as a control rather than a second progress bar —
+   the filled track above already shows where the reader is. */
+.current__slider {
+  width: 100%;
+  margin-top: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.current__slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line-strong);
+}
+
+.current__slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line-strong);
+}
+
+.current__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+}
+
+.current__slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+}
+
+.current__slider:active::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+
+.current__slider-hint {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+}
+
+.current__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------------------------------------------------------------- finishing */
+
+.current__finish {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  background: var(--gold-soft);
+}
+
+.current__finish-prompt {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+}
+
+.current__finish .current__actions {
+  margin-top: 1rem;
+}
+
+.star-picker {
+  display: flex;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+}
+
+.star-picker__star {
+  border: 0;
+  background: none;
+  padding: 0.1rem 0.15rem;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: #d9c9a8;
+  transition: color 100ms ease, transform 100ms ease;
+}
+
+.star-picker__star:hover {
+  transform: scale(1.12);
+}
+
+.star-picker__star--on {
+  color: var(--gold);
+}
+
+/* ---------------------------------------------------------------- goal */
+
+.goal {
+  padding: 1.5rem;
+  text-align: center;
+  position: sticky;
+  top: 6rem;
+}
+
+.goal__title {
+  font-size: 1.0625rem;
+  color: var(--ink-soft);
+}
+
+.goal__ring {
+  position: relative;
+  width: 11rem;
+  margin: 1rem auto 0;
+}
+
+.goal__ring svg {
+  width: 100%;
+  transform: rotate(-90deg);
+}
+
+.goal__ring-track,
+.goal__ring-fill {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.goal__ring-track {
+  stroke: var(--surface-sunk);
+}
+
+.goal__ring-fill {
+  stroke: var(--olive);
+  transition: stroke-dashoffset 400ms ease;
+}
+
+.goal__ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.goal__count {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.goal__of {
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+}
+
+.goal__note {
+  margin-top: 0.9rem;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+.goal__edit-toggle {
+  margin-top: 0.5rem;
+}
+
+.goal__edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.goal__edit label {
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+}
+
+.goal__edit input {
+  font: inherit;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- finished */
+
+.reading__finished {
+  margin-top: 3.5rem;
+}
+
+.finished-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.25rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.finished-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.finished-item__text {
+  min-width: 0;
+}
+
+.finished-item__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.finished-item__author {
+  margin-top: 0.2rem;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.finished-item__rating {
+  margin-top: 0.35rem;
+  color: var(--gold);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.finished-item__date {
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 900px) {
+  .reading__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .goal {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .current__top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .current__meta {
+    justify-content: center;
+  }
+}

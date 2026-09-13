@@ -1,0 +1,171 @@
+.choose__header {
+  max-width: 42rem;
+  padding-block: 1.5rem 0;
+}
+
+.choose__header h1 {
+  font-size: clamp(2rem, 5vw, 2.875rem);
+  margin-top: 0.6rem;
+}
+
+/* ---------------------------------------------------------------- mood chips */
+
+.choose__moods {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.choose__moods-label {
+  margin-right: 0.35rem;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+}
+
+.mood-chip {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.mood-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.mood-chip--active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink-inverse);
+}
+
+.mood-chip--active:hover {
+  color: var(--ink-inverse);
+}
+
+.choose__prompt {
+  margin-top: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- pick cards */
+
+.choose__picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  transition: opacity 160ms ease;
+}
+
+.choose__picks--loading {
+  opacity: 0.45;
+}
+
+.pick {
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.pick__cover {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.pick__title {
+  font-size: 1.375rem;
+  text-wrap: balance;
+}
+
+.pick__author {
+  margin-top: 0.3rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.pick__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.pick__blurb {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* The "why this one" note is the reason this screen beats staring at a shelf,
+   so it gets the warmest surface on the card. */
+.pick__reason {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  text-align: left;
+}
+
+.pick__reason-headline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-hover);
+}
+
+.pick__reason-detail {
+  margin-top: 0.35rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: #6b3a25;
+}
+
+.pick__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.choose__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
+  font-size: 0.9375rem;
+}
+
+.choose__footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}

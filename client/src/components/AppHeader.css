@@ -1,0 +1,97 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgb(246 239 227 / 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.app-header__inner {
+  width: min(100% - 2.5rem, var(--page-width));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 4.5rem;
+  padding-block: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.app-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* Three little book spines standing in for a logo. */
+.app-header__mark {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 1.25rem;
+}
+
+.app-header__mark i {
+  display: block;
+  width: 5px;
+  border-radius: 1.5px;
+}
+
+.app-header__mark i:nth-child(1) { height: 100%; background: var(--accent); }
+.app-header__mark i:nth-child(2) { height: 82%; background: var(--olive); }
+.app-header__mark i:nth-child(3) { height: 92%; background: var(--gold); }
+
+.app-header__nav {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.app-header__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.app-header__link:hover {
+  background: rgb(255 255 255 / 0.6);
+  color: var(--ink);
+}
+
+.app-header__link--active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-header__link-label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.app-header__link-question {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.app-header__link--active .app-header__link-question {
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .app-header__link-question {
+    display: none;
+  }
+}

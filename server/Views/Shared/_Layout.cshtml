@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · My Bookshelf</title>
+    <link rel="icon" href="~/favicon.ico" />
+    <style>
+        body { margin: 0; background: #f6efe4; color: #3b2f26; font-family: Georgia, "Iowan Old Style", serif; }
+        main { max-width: 34rem; margin: 18vh auto; padding: 0 1.5rem; line-height: 1.6; }
+        h1 { font-size: 2rem; }
+        a { color: #8a5a2b; }
+        code { background: #e8dcc8; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <main>
+        @RenderBody()
+    </main>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

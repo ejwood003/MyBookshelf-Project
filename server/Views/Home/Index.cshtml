@@ -1,0 +1,51 @@
+﻿@model MyBookshelf.Server.Models.AppShellViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Bookshelf</title>
+    <meta name="description" content="A digital bookshelf for readers who want to know what they own and what to read next." />
+    <link rel="icon" type="image/svg+xml" href="~/app/favicon.svg" />
+    @if (Model.Assets is not null)
+    {
+        foreach (var stylesheet in Model.Assets.StylePaths)
+        {
+            <link rel="stylesheet" href="@stylesheet" />
+        }
+    }
+</head>
+<body>
+    @if (Model.Assets is not null)
+    {
+        <div id="root"></div>
+        <script type="module" src="@Model.Assets.ScriptPath"></script>
+    }
+    else
+    {
+        <main class="shell-notice">
+            <h1>My Bookshelf</h1>
+            <p>The React client hasn't been built yet, so there is nothing to show on this port.</p>
+            @if (Model.IsDevelopment)
+            {
+                <p>
+                    While developing, run <code>npm run dev</code> in the <code>client</code> folder and open
+                    <a href="@Model.DevServerUrl">@Model.DevServerUrl</a>. The dev server proxies
+                    <code>/api</code> back to this one.
+                </p>
+            }
+            <p>To serve the UI from this port instead, run <code>npm run build</code> in <code>client</code> and refresh.</p>
+        </main>
+        <style>
+            body { margin: 0; background: #f6efe4; color: #3b2f26; font-family: Georgia, "Iowan Old Style", serif; }
+            .shell-notice { max-width: 34rem; margin: 18vh auto; padding: 0 1.5rem; line-height: 1.6; }
+            .shell-notice h1 { font-size: 2rem; margin-bottom: 1rem; }
+            .shell-notice code { background: #e8dcc8; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+            .shell-notice a { color: #8a5a2b; }
+        </style>
+    }
+</body>
+</html>

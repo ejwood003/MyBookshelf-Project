@@ -29,9 +29,9 @@
   grid-template-columns: repeat(4, 1fr);
   margin: 2.5rem 0 0;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.45);
+  background: var(--panel-bg);
   overflow: hidden;
 }
 
@@ -70,9 +70,10 @@
 .shelf {
   margin-top: 3rem;
   padding: 1.5rem 1.5rem 1.25rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.4);
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
 }
 
 /* Shelves sit closer to each other than to the summary above them, so the three

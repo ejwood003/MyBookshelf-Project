@@ -22,6 +22,17 @@
   --line: #e2d5c0;
   --line-strong: #d0bfa4;
 
+  /* Bounded regions. Every panel shares one fill, edge and lift so a heading
+     and its contents read as a single unit. The fill is opaque rather than
+     translucent white: the paper behind it is a gradient, so a translucent
+     panel changed shade as it moved down the page and all but vanished near
+     the top. */
+  --panel-bg: var(--surface);
+  --panel-border: var(--line-strong);
+  --panel-shadow:
+    0 1px 2px rgb(60 40 20 / 0.05),
+    0 10px 24px -18px rgb(60 40 20 / 0.35);
+
   /* Accents: deep russet for actions, olive and gold for support */
   --accent: #9a4b2c;
   --accent-hover: #823d22;
@@ -340,10 +351,10 @@ button {
 /* ---------------------------------------------------------- cards */
 
 .card {
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--panel-shadow);
 }
 
 /* ---------------------------------------------------------- states */

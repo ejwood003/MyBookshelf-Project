@@ -315,9 +315,10 @@
 .reading__finished {
   margin-top: 2.5rem;
   padding: 1.5rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.4);
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
 }
 
 .finished-list {

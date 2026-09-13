@@ -9,9 +9,10 @@
   gap: 0.5rem;
   margin-top: 2.25rem;
   padding: 1rem 1.25rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.45);
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
 }
 
 .choose__moods-label {

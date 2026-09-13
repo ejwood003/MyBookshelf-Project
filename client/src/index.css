@@ -31,6 +31,13 @@
   --gold: #b8863a;
   --gold-soft: #f6ead2;
 
+  /* Reading status is colour-coded the same way on every screen, so the colour
+     alone tells a reader where a book stands: quiet while it waits, russet while
+     it's open, gold once it's done. */
+  --status-waiting: #a4907a;
+  --status-reading: var(--accent);
+  --status-finished: var(--gold);
+
   /* The shelf itself */
   --shelf-top: #a3805f;
   --shelf-face: #7d5c41;
@@ -132,10 +139,100 @@ button {
   font-variant-numeric: tabular-nums;
 }
 
+/* ---------------------------------------------------------- status dot
+
+   The same three dots appear wherever a reading status is named, on all three
+   screens, so the colour becomes readable on its own. */
+
+.status-dot {
+  display: inline-block;
+  flex: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+}
+
+.status-dot--waiting {
+  background: var(--status-waiting);
+}
+
+.status-dot--reading {
+  background: var(--status-reading);
+}
+
+.status-dot--finished {
+  background: var(--status-finished);
+}
+
+.section-heading h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
 .section-caption {
   color: var(--ink-soft);
   font-size: 0.9375rem;
   margin-top: 0.25rem;
+}
+
+/* ---------------------------------------------------------- page intro
+
+   Every screen opens with the same block in the same place: a way back, a small
+   eyebrow, a title and one line of explanation. Repeating the shape is what makes
+   the three screens read as one product before a single word is read. */
+
+.page-intro {
+  max-width: 44rem;
+  padding-block: 1.5rem 0;
+}
+
+.page-intro__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.page-intro__title {
+  font-size: clamp(2rem, 5vw, 2.875rem);
+  margin-top: 0.6rem;
+  text-wrap: balance;
+}
+
+.page-intro__lede {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* The landing title carries the most weight of the three. */
+.page-intro--landing .page-intro__title {
+  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
+}
+
+/* ---------------------------------------------------------- back link */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  transition: color 120ms ease, gap 120ms ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  gap: 0.6rem;
+}
+
+.back-link__arrow {
+  font-size: 1.1em;
+  line-height: 1;
 }
 
 /* ---------------------------------------------------------- buttons */
@@ -200,6 +297,13 @@ button {
 .btn--large {
   padding: 0.85rem 1.75rem;
   font-size: 1.0625rem;
+}
+
+/* Reserved for the landing screen's single primary action. */
+.btn--xl {
+  padding: 1rem 2.25rem;
+  font-size: 1.1875rem;
+  box-shadow: var(--shadow);
 }
 
 /* ---------------------------------------------------------- pills */

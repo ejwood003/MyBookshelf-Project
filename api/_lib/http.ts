@@ -6,9 +6,28 @@
  * that shape so client/src/api/client.ts keeps rendering useful messages.
  */
 
-import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { READING_STATUSES, type ReadingStatus } from './domain'
 import { PICKER_MOODS, type PickerMood } from './recommend'
+
+/**
+ * The slice of Vercel's request and response objects these handlers touch.
+ *
+ * Declared here rather than imported from @vercel/node: that package exists to *build*
+ * functions, and depending on it just for two type names pulls esbuild into the install,
+ * whose postinstall script npm now blocks by default.
+ */
+export interface VercelRequest {
+  method?: string
+  query: Record<string, string | string[] | undefined>
+  body?: unknown
+}
+
+export interface VercelResponse {
+  status(code: number): VercelResponse
+  json(body: unknown): VercelResponse
+  setHeader(name: string, value: string): void
+  end(): void
+}
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
 type Handler = (req: VercelRequest, res: VercelResponse) => Promise<void> | void

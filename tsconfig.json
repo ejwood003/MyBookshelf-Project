@@ -2,8 +2,11 @@
   "compilerOptions": {
     "target": "ES2022",
     "lib": ["ES2022"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    // The functions run on Node without "type": "module", so they are CommonJS at
+    // runtime. Vercel reads this file when it compiles api/**; asking for ESM output
+    // here puts `import` statements into a file Node loads as CommonJS.
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,

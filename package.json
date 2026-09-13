@@ -1,0 +1,16 @@
+{
+  "name": "mybookshelf",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix client ci && npm --prefix client run build -- --base=/ --outDir=dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.35.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@vercel/node": "^5.1.0",
+    "typescript": "~5.9.2"
+  }
+}

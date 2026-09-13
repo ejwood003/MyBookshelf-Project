@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.HttpOverrides;
 using MyBookshelf.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,16 @@ builder.Services.AddSingleton<IViteAssetProvider, ViteAssetProvider>();
 builder.Services.AddScoped<IBookshelfService, BookshelfService>();
 builder.Services.AddScoped<IRecommendationService, RecommendationService>();
 
+// A hosting platform that terminates TLS for us forwards plain HTTP with the original
+// scheme in a header. Without this the HTTPS redirect below never sees a secure request
+// and bounces the browser in a loop.
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
 const string ViteDevServer = "ViteDevServer";
 builder.Services.AddCors(options =>
 {
@@ -28,6 +39,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 if (app.Environment.IsDevelopment())
 {
